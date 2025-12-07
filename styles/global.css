@@ -229,4 +229,83 @@
 .flex-center { display: flex; justify-content: center; align-items: center; }
 .flex-start { display: flex; justify-content: flex-start; align-items: flex-start; }
 .flex-end { display: flex; justify-content: flex-end; align-items: center; }
+
 .flex-between { display: flex; justify-content: space-between; align-items: center; }
+
+/* Form Inputs & Textarea */
+.form_input,
+.form_textarea {
+  width: 100%;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(255,255,255,0.9);
+  padding: 0.9rem 1.05rem;
+  font-size: 1rem;
+  color: #0f172a;
+  box-shadow: 0 6px 20px rgba(12, 46, 86, 0.04);
+  transition: box-shadow 0.18s ease, transform 0.12s ease, border-color 0.12s ease;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.form_input:hover,
+.form_textarea:hover {
+  box-shadow: 0 10px 30px rgba(12, 46, 86, 0.06);
+  transform: translateY(-1px);
+}
+
+.form_input:focus-visible,
+.form_textarea:focus-visible {
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.95);
+  box-shadow: 0 10px 40px rgba(37,99,235,0.08), 0 0 0 4px rgba(37,99,235,0.06);
+}
+
+.form_textarea {
+  min-height: 160px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Primary orange background used on buttons */
+.bg-primary-orange {
+  background: linear-gradient(90deg, #fb923c 0%, #fb7a2e 50%, #f97316 100%);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.12);
+}
+
+.bg-primary-orange:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(249,115,22,0.16);
+  opacity: 0.98;
+}
+
+.bg-primary-orange:active {
+  transform: translateY(-1px) scale(0.997);
+}
+
+/* Small utility tweaks for form layout */
+.flex-end { display:flex; justify-content:flex-end; align-items:center; }
+
+/* Make glassmorphism a touch warmer on forms */
+.glassmorphism {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(226,232,240,0.6);
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(250,250,250,0.6));
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Improve accessibility for small text links */
+.text-gray-500 { color: #52525b; transition: color 0.12s ease; }
+.text-gray-500:hover { color: #111827; }
+
+/* Responsive tweaks */
+@media screen and (max-width: 640px) {
+  .form_input,
+  .form_textarea {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .form_textarea { min-height: 120px; }
+}
+

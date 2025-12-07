@@ -1,51 +1,43 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import prisma from "@/lib/prisma";
+import {connectToDatabase} from "@/utils/database";
+import User from "@models/user";
+
 
 const handler = NextAuth({
-  providers: [
+  providers:[
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
+      clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    })
   ],
-
   callbacks: {
-    async signIn({ profile }) {
+    async session({session}) {
+      const sessionUser = await User.findOne({email: session.user.email})
+      session.user.id = sessionUser._id.toString()
+      return session
+    },
+    async signIn({profile}){
       try {
-        const userExists = await prisma.user.findUnique({
-          where: { email: profile.email },
-        });
+        await connectToDatabase();
 
-        if (!userExists) {
-          await prisma.user.create({
-            data: {
-              email: profile.email,
-              username: profile.name, // Google does NOT send profile.username
-              image: profile.picture,
-            },
-          });
+        // check if user already exists
+        const userExists = await User.findOne({email:profile.email})
+
+        //if not, create a new user
+        if(!userExists){
+          await User.create({
+            email: profile.email,
+            username: profile.name.replace(" ","").toLowerCase(),
+            image: profile.picture
+          })
         }
-
         return true;
       } catch (error) {
-        console.log("Error checking or creating user:", error);
+        console.log('Error connecting to database', error)
         return false;
       }
-    },
-
-    async session({ session }) {
-      // Fetch user from DB
-      const user = await prisma.user.findUnique({
-        where: { email: session.user.email },
-      });
-
-      // Attach user id
-      session.user.id = user.id;
-
-      return session;
-    },
-  },
-});
-
-export { handler as GET, handler as POST };
+    }
+  }
+})
+export {handler as GET, handler as POST}
