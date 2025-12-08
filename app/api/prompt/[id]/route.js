@@ -4,9 +4,10 @@ import Prompt from "@models/prompt"
 //GET(read)
 export const GET = async(request, context)=>{
     try {
+        const { id } = await context.params;
         await connectToDatabase()
 
-        const prompt = await Prompt.findById(context.params.id).populate('creator')
+        const prompt = await Prompt.findById(id).populate('creator')
         if(!prompt){
             return new Response("Prompt not found", {status:404})
         }
@@ -20,11 +21,12 @@ export const GET = async(request, context)=>{
 
 //PATCH(update)
 export const PATCH = async(request, context)=>{
-    const {prompt, tag} = await request.json()
     try {
+        const { id } = await context.params;
+        const {prompt, tag} = await request.json()
         await connectToDatabase()
 
-        const existingPrompt = await Prompt.findById(context.params.id)
+        const existingPrompt = await Prompt.findById(id)
         if(!existingPrompt){
             return new Response("Prompt not found", {status:404})
         }
@@ -41,9 +43,10 @@ export const PATCH = async(request, context)=>{
 //DELETE(remove)
 export const DELETE = async(request, context)=>{
     try {
+        const { id } = await context.params;
         await connectToDatabase()
 
-        await Prompt.findByIdAndDelete(context.params.id)
+        await Prompt.findByIdAndDelete(id)
         return new Response("Prompt deleted successfuly",{status:200})
     } catch (error) {
         return new Response("Failed to delete prompt", {status:500})

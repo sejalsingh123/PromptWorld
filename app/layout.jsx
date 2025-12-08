@@ -1,6 +1,7 @@
 import '@styles/global.css'
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
+import Footer from '@components/Footer';
 
 export const metadata ={
     title: "PromptWorld",
@@ -8,6 +9,7 @@ export const metadata ={
 }
 const RootLayout = ({ children }) => (
   <html lang='en'>
+
     <body>
       <Provider>
         <div className='main'>
@@ -16,6 +18,7 @@ const RootLayout = ({ children }) => (
         <main className='app'>
           <Nav />
           {children}
+          <Footer/>
         </main>
       </Provider>
     </body>

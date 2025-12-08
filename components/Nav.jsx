@@ -19,41 +19,47 @@ const Nav = () => {
   }, [])
 
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
-      <Link href="/" className="flex gap-2 flex-center">
+    <nav className="flex items-center justify-between w-full py-4 px-6 bg-white/70 backdrop-blur-md shadow-sm border-b border-gray-200">
+
+      {/* LOGO */}
+      <Link href="/" className="flex items-center gap-2">
         <Image
           src="/assets/images/logo.svg"
           alt="PromptWorld Logo"
-          width={30}
-          height={30}
+          width={35}
+          height={35}
           className="object-contain"
         />
+        <p className="logo_text">PromptWorld</p>
       </Link>
 
-      <p className="logo_text">PromptWorld</p>
+      {/* DESKTOP NAV */}
+      <div className="hidden sm:flex items-center gap-5">
 
-      {/* desktop navigation */}
-      <div className="sm:flex hidden">
         {session?.user ? (
-          <div className="flex gap-3 md:gap-5">
+          <>
             <Link href="/create-post" className="black_btn">
               Create Prompt
             </Link>
 
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button
+              type="button"
+              onClick={signOut}
+              className="black_btn"
+            >
               Sign Out
             </button>
 
             <Link href="/myProfile">
               <Image
                 src={session.user.image}
-                width={37}
-                height={37}
-                className="rounded-full"
+                width={40}
+                height={40}
+                className="profile_img"
                 alt="profile"
               />
             </Link>
-          </div>
+          </>
         ) : (
           <>
             {providers &&
@@ -71,15 +77,16 @@ const Nav = () => {
         )}
       </div>
 
-      {/* mobile navigation */}
-      <div className="sm:hidden flex relative">
+      {/* MOBILE NAV */}
+      <div className="sm:hidden flex items-center relative">
+
         {session?.user ? (
-          <div className="flex">
+          <>
             <Image
               src={session.user.image}
-              width={37}
-              height={37}
-              className="rounded-full"
+              width={40}
+              height={40}
+              className="profile_img"
               alt="profile"
               onClick={() => setToggleDropdown((prev) => !prev)}
             />
@@ -95,7 +102,7 @@ const Nav = () => {
                 </Link>
 
                 <Link
-                  href="/create-prompt"
+                  href="/create-post"
                   className="dropdown_link"
                   onClick={() => setToggleDropdown(false)}
                 >
@@ -105,16 +112,16 @@ const Nav = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setToggleDropdown(false)
-                    signOut()
+                    setToggleDropdown(false);
+                    signOut();
                   }}
-                  className="mt-5 w-full black_btn"
+                  className="mt-3 w-full black_btn"
                 >
                   Sign Out
                 </button>
               </div>
             )}
-          </div>
+          </>
         ) : (
           <>
             {providers &&
@@ -132,7 +139,8 @@ const Nav = () => {
         )}
       </div>
     </nav>
-  )
+);
+
 }
 
 export default Nav

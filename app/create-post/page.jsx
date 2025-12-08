@@ -29,6 +29,7 @@ const CreatePrompt = () => {
 
             if(response.ok){
                 router.push('/')
+                alert("New Prompt created.")
             }
         } catch (error) {
             console.log(error)
