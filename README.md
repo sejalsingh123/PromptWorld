@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+📘 PromptWorld — AI Prompt Sharing Platform
 
-## Getting Started
+Built with Next.js, MongoDB & NextAuth (Google Authentication)
 
-First, run the development server:
+PromptWorld is an open-source AI prompting platform where users can discover, create, edit, delete, and share AI prompts.
+It is designed to be a modern creative space where developers and AI enthusiasts explore and share high-quality prompts to improve productivity and creativity.
 
-```bash
+🚀 Features
+🔐 Authentication
+
+Google Sign-In using NextAuth.js
+
+Secure session handling
+
+Protected routes & API security
+
+🧠 AI Prompt Management
+
+Create AI prompts
+
+Edit your own prompts
+
+Delete your own prompts
+
+Copy prompt text directly using copy icon
+
+Add tags (#sql, #webdev, #idea, etc.)
+
+👥 User-Based Experience
+
+View all prompts on the homepage
+
+Search prompts by tag, username, or keyword
+
+Visit any user’s profile by clicking their username
+
+Logged-in users cannot edit or delete other users’ prompts
+
+🗂 Database Features
+
+MongoDB for highly scalable document storage
+
+Mongoose models for users & prompts
+
+API routes follow REST principles
+
+🎨 UI / UX
+
+Modern, responsive UI
+
+Gradient backgrounds & clean layout
+
+Smooth interactions
+
+Profile dashboard
+
+“Create Prompt” page with form validation
+
+🛠 Tech Stack
+Frontend
+
+Next.js 13+ App Router
+
+React
+
+Tailwind CSS
+
+Backend
+
+Next.js server actions
+
+NextAuth.js (Google Login)
+
+MongoDB + Mongoose
+
+API Routes (/api/prompt, /api/users/[id]/posts, etc.)
+
+
+📂 Project Structure
+PromptWorld/
+│── app/
+│   ├── create-prompt/
+│   ├── myProfile/[id]/
+│   ├── api/
+│   │   ├── prompt/
+│   │   ├── users/[id]/posts
+│── components/
+│── models/
+│── utils/
+│── public/
+│── README.md
+
+⚙️ Environment Variables
+
+Create a .env file and add:
+
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_secret_key
+MONGODB_URI=your_mongodb_connection_string
+
+🏗 Installation & Setup
+1️⃣ Clone the Repository
+git clone https://github.com/sejalsingh123/PromptWorld.git
+cd PromptWorld
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Add Environment Variables
+
+Create a .env file and paste the vars from above.
+
+4️⃣ Run the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Visit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+🧪 Core Functionalities
+🔹 Create Prompt
 
-To learn more about Next.js, take a look at the following resources:
+POST → /api/prompt
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔹 View All Prompts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+GET → /api/prompt
 
-## Deploy on Vercel
+🔹 Edit a Prompt
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+PATCH → /api/prompt/[id]
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🔹 Delete Prompt
+
+DELETE → /api/prompt/[id]
+
+🔹 User Posts
+
+GET → /api/users/[id]/posts
+
+🤝 Contributing
+
+Contributions are welcome!
+If you'd like to improve PromptWorld, feel free to fork the repo and open a pull request.
+
+⭐ Show Your Support
+
+If you like this project, consider giving it a star on GitHub ⭐.
+It helps others discover the project!
+
+📬 Contact
+
+Developer: Sejal Singh
+GitHub: https://github.com/sejalsingh123
